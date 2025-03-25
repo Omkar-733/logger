@@ -273,7 +273,7 @@ while($j=mysqli_fetch_array($result2)){ ?>
                             <td>
                                 <form action="" method="POST" style="display: inline;">
                                     <input type="hidden" name="leave_request_id" value="<?= $request['id'] ?>">
-                                    <a href="update.php?update=<?php echo $j['Labs'];?>" onClick="return confirm('Are you sure?')" style="text-decoration:none;font-size:18px;color:rgba(255,0,4,1.00);">STOP</a>
+                                    <a href="update1.php?update=<?php echo $j['Labs'];?>" onClick="return confirm('Are you sure?')" style="text-decoration:none;font-size:18px;color:rgba(255,0,4,1.00);">STOP</a>
                                 </form>
                             </td>
                         </tr>

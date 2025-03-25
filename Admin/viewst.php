@@ -197,7 +197,7 @@ form .input-box span.details{
 
 <body style="background: #063247;">
   <nav>
-         <label class="logo">Admin Panel</label>
+         <label class="logo"><a class="logo"  href="home.php">Admin Panel</a></label>
        <ul>
             <li><a class="active" href="home.php">Home</a></li>
             <li>
@@ -228,7 +228,7 @@ form .input-box span.details{
                <i class="fas fa-caret-down"></i>
                </a>
                <ul>
-               <li><a href="editadmin.php?id=addFaculty">Add Faculty</a></li>
+               <li><a href="editadmin.php?id =addFaculty">Add Faculty</a></li>
                     <li><a href="editadmin.php?id=changePassword">Change Password</a></li>
                 
                </ul>

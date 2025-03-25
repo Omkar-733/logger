@@ -2,8 +2,6 @@
 include("../configASL.php");
 
 
-
-
 session_start();
 
 date_default_timezone_set("Asia/Kolkata");
@@ -36,13 +34,12 @@ date_default_timezone_set("Asia/Kolkata");
 
 
 
-$sql2 = "SELECT `Labs`,`start`,`sem` FROM `labs` WHERE `status`=1";
+$sql2 = "SELECT `Labs`,`duration`,`sem` FROM `labs` WHERE `status`=1";
 $result2 = mysqli_query($al, $sql2);
 while ($j = mysqli_fetch_array($result2)) {
     $lab = $j['Labs'];
-    $start=$j['start'];
+    $duration=$j['duration'];
     $sem=$j['sem'];
-
 
 }
 if (!$lab) {
@@ -70,22 +67,24 @@ if ($_SESSION['st_pin']) {
     if (!empty($_POST)) {
         $com_no = $_POST['com_no'];
         $client_id = hash('sha256', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
-        $check_query = "SELECT * FROM log WHERE client_id = '$client_id' AND created_at < '$start'";
+        $check_query = "SELECT * FROM log WHERE client_id = '$client_id' AND TIMESTAMPDIFF(SECOND, created_at, NOW()) < ($duration*60)";
         $check_result = mysqli_query($al, $check_query);
 
         if (mysqli_num_rows($check_result) > 0) {
-            header("Location: 403.php");
-             exit; 
+            header("Location: ./403.php");
+             exit;
         }
+        else{ 
+
+
         $insert_query = "INSERT INTO log (date, time, lab_name, st_year, st_pin,st_name, com_no, client_id, created_at,sem) VALUES ('$date', '$time', '$lab', '$batch', '$aid', '$name', '$com_no', '$client_id', NOW(),'$sem')";
         $u = mysqli_query($al, $insert_query);
         if (!$u) {
           die("Insert Error: " . mysqli_error($al));
       } else{
-        alert("Successfully submitted");
         header("location: ./stlog.php");
       }
-
+    }
         
     }
    
@@ -95,6 +94,7 @@ if ($_SESSION['st_pin']) {
 <html>
 <head>       
         <link rel="stylesheet" href="log.css">
+        <link rel="stylesheet" href="admin.css" >
 </head>
 <style>
 h3 button{
@@ -127,6 +127,28 @@ width:200px;
 </style>
 <?php if ($lab): ?>
 <body>
+  
+<nav>
+         <label class="logo"><a class="logo" href="stlog.php">Student Panel</a></label>
+         <ul>
+            <li><a class="active" href="stlog.php">Home</a></li>
+            <li>
+               <a href="student_view.php">Join Lab
+               <i class="fas fa-caret-down"></i>
+               </a>
+            
+            </li>
+            <li>
+               <a href="#">settings
+               <i class="fas fa-caret-down"></i>
+               </a>
+               <ul>
+                  <li><a href="Change_password.php">Change Password</a></li>
+               </ul>
+</li>
+            <li><a href="exit1.php">Logout</a></li>
+         </ul>
+      </nav>
 <h3>
 <button onClick="window.location='feeds.php'" >
 feedback

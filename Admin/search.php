@@ -413,12 +413,17 @@ Search
 </table>
      <br>
     <div class="login">
-     <button class="print" onclick="print
-     ()">
+    <?php
+$query = "SELECT * FROM log ORDER BY st_pin";
+$encodedQuery = base64_encode($query); // Encode to avoid URL issues
+?>
+
+<a href="download_csv.php?query=<?php echo $encodedQuery; ?>" class="btn btn-primary">
+     <button class="print">
       <span></span>
       <span></span>
       <span></span>
-      <span></span>	Download PDF</button>
+      <span></span>	Download PDF</button></a>
       </div>
 
 

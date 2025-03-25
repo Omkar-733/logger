@@ -28,7 +28,7 @@ if(!mysqli_num_rows($res1) > 0) {
 <body>
 	
     <nav>
-         <label class="logo">Student Panel</label>
+         <label class="logo"><a class="logo" href="stlog.php">Student Panel</a></label>,
          <ul>
             <li><a class="active" href="stlog.php">Home</a></li>
             <li>
