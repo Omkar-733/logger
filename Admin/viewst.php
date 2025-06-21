@@ -13,9 +13,7 @@ if(!mysqli_num_rows($res1) > 0) {
 } 
 
 
-$a=mysqli_query($al,"select * from admin where aid='admin'");
-$b=mysqli_fetch_array($a);
-$el=$b['ele'];
+
 $x=mysqli_query($al,"select * from admin where aid='$aid'");
 $y=mysqli_fetch_array($x);
 $name=$y['name'];
